@@ -2,3 +2,4 @@ selenium
 pytest
 python-dotenv
 faker
+allure-pytest
