@@ -24,8 +24,8 @@ def test_inventory_items_visible_after_login(logged_in_driver):
     ("Name (A to Z)", sorted),
     ("Name (Z to A)", lambda items: sorted(items, reverse=True))
 ], ids=[
-    "Сортировка 'Name (A to Z)'",
-    "Сортировка 'Name (Z to A)'"
+    "Sorting 'Name (A to Z)'",
+    "Sorting 'Name (Z to A)'"
 ])
 def test_sorting_by_name(logged_in_driver, sorting_option, expected_order):
     with allure.step("Инициализируем InventoryPage"):
