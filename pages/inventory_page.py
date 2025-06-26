@@ -57,3 +57,7 @@ class InventoryPage(BasePage):
     @log_action
     def get_all_item_names(self) -> list[str]:
         return [item.find_element(*self.INVENTORY_NAME).text for item in self._get_all_the_inventory_items()]
+
+    @log_action
+    def open_cart(self):
+        self.click(self.SHOPPING_CART_ICON)
