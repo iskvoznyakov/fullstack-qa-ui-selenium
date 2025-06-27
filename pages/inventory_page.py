@@ -9,9 +9,9 @@ class InventoryPage(BasePage):
     SHOPPING_CART_BADGE = (By.CLASS_NAME, "shopping_cart_badge")
     FILTER_DROPDOWN_LIST = (By.XPATH, "//select[@data-test='product-sort-container']")
     INVENTORY_ITEM = (By.CLASS_NAME, "inventory_item")
-    INVENTORY_NAME = (By.XPATH, "//div[@data-test='inventory-item-name']")
-    INVENTORY_DESCRIPTION = (By.XPATH, "//div[@data-test='inventory-item-desc']")
-    INVENTORY_PRICE = (By.XPATH, "//div[@data-test='inventory-item-price']")
+    INVENTORY_ITEM_NAME = (By.CLASS_NAME, "inventory_item_name")
+    INVENTORY_ITEM_DESCRIPTION = (By.CLASS_NAME, "inventory_item_desc")
+    INVENTORY_ITEM_PRICE = (By.CLASS_NAME, "inventory_item_price")
 
     @log_action
     def get_number_of_inventory_items(self):
@@ -28,7 +28,7 @@ class InventoryPage(BasePage):
     @log_action
     def click_add_to_cart_for(self, item_name: str):
         for item in self._get_all_the_inventory_items():
-            name = item.find_element(*self.INVENTORY_NAME).text.strip()
+            name = item.find_element(*self.INVENTORY_ITEM_NAME).text.strip()
             if name == item_name.strip():
                 add_button = item.find_element(By.TAG_NAME, "button")
                 add_button.click()
@@ -44,9 +44,9 @@ class InventoryPage(BasePage):
     def get_information_about_item_by_order(self, order: int):
         item = self._get_all_the_inventory_items()[order - 1]
         return {
-            "Name": item.find_element(*self.INVENTORY_NAME).text,
-            "Description": item.find_element(*self.INVENTORY_DESCRIPTION).text,
-            "Price": item.find_element(*self.INVENTORY_PRICE).text
+            "Name": item.find_element(*self.INVENTORY_ITEM_NAME).text,
+            "Description": item.find_element(*self.INVENTORY_ITEM_DESCRIPTION).text,
+            "Price": item.find_element(*self.INVENTORY_ITEM_PRICE).text
         }
 
     @log_action
@@ -56,7 +56,7 @@ class InventoryPage(BasePage):
 
     @log_action
     def get_all_item_names(self) -> list[str]:
-        return [item.find_element(*self.INVENTORY_NAME).text for item in self._get_all_the_inventory_items()]
+        return [item.find_element(*self.INVENTORY_ITEM_NAME).text for item in self._get_all_the_inventory_items()]
 
     @log_action
     def open_cart(self):
