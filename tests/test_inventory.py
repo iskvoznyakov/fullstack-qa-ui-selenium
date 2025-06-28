@@ -18,7 +18,7 @@ def test_inventory_items_visible_after_login(logged_in_driver):
 
 @allure.feature("Список товаров")
 @allure.story("Сортировка товаров")
-@allure.title("Проверка сортировки товаров после успешной авторизации")
+@allure.title("Проверка сортировки товаров")
 @allure.description("Тест проверяет корректную сортировку товаров в зависимости от выбранной опции")
 @pytest.mark.parametrize("sorting_option, expected_order", [
     ("Name (A to Z)", sorted),
@@ -37,6 +37,10 @@ def test_sorting_by_name(logged_in_driver, sorting_option, expected_order):
         assert items_names == expected_order(items_names), f"Сортировка {sorting_option} работает некорректно"
 
 
+@allure.feature("Список товаров")
+@allure.story("Добавление товаров")
+@allure.title("Проверка добавления товара")
+@allure.description("Тест проверяет корректное добавление товара в корзину")
 def test_add_one_item_to_cart(logged_in_driver):
     inventory_page = InventoryPage(driver=logged_in_driver)
     item_name = inventory_page.get_information_about_item_by_order(1)["Name"]
